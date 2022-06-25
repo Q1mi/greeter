@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package helloworld;
+
+option go_package="github.com/Q1mi/greeter/proto/helloworld";
+
+// 导入google/api/annotations.proto
+import "google/api/annotations.proto";
+
+// 定义一个Greeter服务
+service Greeter {
+  // 打招呼方法
+  rpc SayHello (HelloRequest) returns (HelloReply) {
+    // 这里添加了google.api.http注释
+    option (google.api.http) = {
+      post: "/v1/example/echo"
+      body: "*"
+    };
+  }
+}
+
+// 定义请求的message
+message HelloRequest {
+  string name = 1;
+}
+
+// 定义响应的message
+message HelloReply {
+  string message = 1;
+}
